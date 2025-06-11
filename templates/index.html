@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <div class="calculator">
-            <form method="post"></form>
+            <form method="post">
             <div class="display">
-                <input type="text" name="expressao" value="{{ expressao }}" readonly>
+                <input type="hidden" id="expressaoOculta" name="expressao">
+                <input type="text" name="expressao" placeholder="..." value="{{ expressao }}" readonly>
                 <div class="resultado">{{ resultado }}</div>
             </div>
             <div class="botoes">
@@ -19,7 +20,7 @@
                     ['4', '5', '6', '-'],
                     ['1', '2', '3', '*'],
                     ['0', '.', '/', '=']
-                    ] % }
+                    ] %}
                 <div class="linha">
                     {% for btn in linha %}
                             {% if btn == '=' %}
@@ -31,7 +32,9 @@
                 </div>
                 {% endfor %}
             </div>
+            </form>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
