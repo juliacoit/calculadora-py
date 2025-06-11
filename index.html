@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <div class="calculator">
+            <form method="post"></form>
+            <div class="display">
+                <input type="text" name="expressao" value="{{ expressao }}" readonly>
+                <div class="resultado">{{ resultado }}</div>
+            </div>
+            <div class="botoes">
+                {% for linha in [
+                    ['7', '8', '9', '+'],
+                    ['4', '5', '6', '-'],
+                    ['1', '2', '3', '*'],
+                    ['0', '.', '/', '=']
+                    ] % }
+                <div class="linha">
+                    {% for btn in linha %}
+                            {% if btn == '=' %}
+                                <button type="submit" name="expressao" value="{{ expressao }}">{{ btn }}</button>
+                            {% else %}
+                                <button type="button" onclick="adicionar('{{ btn }}')">{{ btn }}</button>
+                            {% endif %}
+                        {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>
