@@ -11,7 +11,7 @@
             <form method="post">
             <div class="display">
                 <input type="hidden" id="expressaoOculta" name="expressao">
-                <input type="text" name="expressao" placeholder="..." value="{{ expressao }}" readonly>
+                <input type="text" name="expressao" id="display" placeholder="..." value="{{ expressao }}" readonly>
                 <div class="resultado">{{ resultado }}</div>
             </div>
             <div class="botoes">
@@ -19,14 +19,17 @@
                     ['7', '8', '9', '+'],
                     ['4', '5', '6', '-'],
                     ['1', '2', '3', '*'],
-                    ['0', '.', '/', '=']
+                    ['0', '.', '/', 'DEL'],
+                    ['=']
                     ] %}
                 <div class="linha">
                     {% for btn in linha %}
                             {% if btn == '=' %}
-                                <button type="submit" name="expressao" value="{{ expressao }}">{{ btn }}</button>
+                                <button type="submit">=</button>
+                            {% elif btn == 'DEL' %}
+                                <button type="button" onclick="limpar()">{{ btn }}</button>
                             {% else %}
-                                <button type="button" onclick="adicionar('{{ btn }}')">{{ btn }}</button>
+                                <button type="button" onclick='adicionar("{{ btn }}")'>{{ btn }}</button>
                             {% endif %}
                         {% endfor %}
                 </div>
@@ -35,6 +38,6 @@
             </form>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -7,10 +7,11 @@ def index():
     resultado = ""
     expressao = ""
     if request.method == "POST":
-        expressao = request.form["expressao"]
+        expressao = request.form.get("expressao", "").strip()
+        print("Expressão recebida:", expressao)
         try:
-            resultado = eval(expressao)
-        except:
+            resultado = str(eval(expressao))
+        except Exception as e:
             resultado = "Erro"
     return render_template("index.html", resultado=resultado, expressao=expressao)
 
